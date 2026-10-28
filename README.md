@@ -1,28 +1,34 @@
 # Portfolio Optimisation
 
-Mean-variance using CAPM analysis of a $100 million fund: six U.S.-listed common stocks selected from WRDS (CRSP monthly returns, Jan 2020 – Dec 2024) plus the one-month U.S. Treasury bill as the risk-free asset. All statistics are computed from monthly observations and annualized (mean ×12, standard deviation ×√12).
+Portfolio construction using CAPM analysis. Hand picked six U.S.-listed common stocks selected from WRDS plus the one-month U.S. t-bills as the risk-free rate.
 
 ## Repository contents
 
-| Path                        | Purpose                                                                                     |
-| --------------------------- | ------------------------------------------------------------------------------------------- |
-| `solution.ipynb`            | Main solution notebook (Tasks 1–7)                                                          |
-| `data/crsp_monthly.csv`     | CRSP monthly returns exported from WRDS (columns: `PERMNO`, `Ticker`, `MthCalDt`, `MthRet`) |
-| `data/rf_monthly.csv`       | One-month T-bill rate exported from WRDS (columns: `MthCalDt`, `Rf`)                        |
-| `output/`                   | Generated outputs (Excel workbook, frontier chart)                                          |
-| `Assignment 2026-27(1).pdf` | Assignment brief                                                                            |
+| Path                    | Purpose                                                                             |
+| ----------------------- | ----------------------------------------------------------------------------------- |
+| `solution.ipynb`        | Main solution notebook                                                              |
+| `fetch_data.py`         | Pulls the dataset directly from WRDS (CRSP) + Fama-French Data Library into `data/` |
+| `data/crsp_monthly.csv` | CRSP monthly returns (columns: `PERMNO`, `Ticker`, `MthCalDt`, `MthRet`)            |
+| `data/rf_monthly.csv`   | One-month T-bill rate (columns: `MthCalDt`, `Rf`)                                   |
+| `output/`               | Generated outputs (Excel workbook, frontier chart)                                  |
 
 ## Setup
 
 ```powershell
 # one-time: create the environment
 python -m venv .venv
-.venv\Scripts\python.exe -m pip install pandas numpy scipy matplotlib openpyxl jupyterlab nbconvert
+.venv\Scripts\python.exe -m pip install pandas numpy scipy matplotlib openpyxl jupyterlab nbconvert wrds
 ```
 
 ## Usage
 
 ```powershell
+# 1. fetch the dataset (the first run prompts once for your WRDS username/password
+#    and saves it to a local .env file so later runs are automatic; you can also
+#    set WRDS_USERNAME / WRDS_PASSWORD environment variables instead)
+.venv\Scripts\python.exe fetch_data.py
+
+# 2. open the analysis
 .venv\Scripts\jupyter.exe lab
 ```
 
@@ -30,13 +36,6 @@ Then open `solution.ipynb` and **Run All**. The notebook writes:
 
 - `output/EF3320_Assignment1_Challenge.xlsx` — one sheet per task (returns, risk-free rate, asset statistics, equal-weight portfolio, tangency portfolio, frontier coordinates, efficient-vs-equal-weight comparison, floor allocation). Key answer rows are bolded.
 - `output/frontier.png` — minimum-variance frontier + capital allocation line chart.
-
-## Before submitting
-
-1. **6th asset** — Challenge requires six assets from ≥3 industries. Add your WRDS export to `data/crsp_monthly.csv` (the notebook auto-detects the ticker) and update the industry table in the Task 1 markdown cell.
-2. **Risk-free rate** — `data/rf_monthly.csv` must exist with the same `MthCalDt`,`Rf` format; the load cell raises a clear error if missing. Document the source in the Task 1 cell.
-3. **Task 7** — update the AI-verification text to your actual usage, and type it into the Excel file when finalizing.
-4. Re-run the notebook on the real data before exporting the final Excel file.
 
 ## Notes
 
