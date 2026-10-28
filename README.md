@@ -1,5 +1,7 @@
 # Portfolio Optimisation
 
+![image](./output/frontier.png)
+
 Portfolio construction using CAPM analysis. Hand picked six U.S.-listed common stocks selected from WRDS plus the one-month U.S. t-bills as the risk-free rate.
 
 ## Repository contents
