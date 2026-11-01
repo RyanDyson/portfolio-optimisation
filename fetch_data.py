@@ -1,5 +1,5 @@
 """
-got tired of duo secure
+documentation: https://wrds-www.wharton.upenn.edu/pages/classroom/using-jupyter-at-wrds-notebook/
 pull data directly from WRDS using python and SQL
 credentials are saved on .env on first run
 """
